@@ -14,8 +14,8 @@ window.addEventListener("load", function() {
 
    let dropdownValues = [planetData[0], planetData[1], planetData[2], planetData[3], planetData[4], planetData[5]];
    let selectButton = document.getElementById("selector");
-
    let selectList = document.createElement("select");
+
    selectList.setAttribute("id", "mySelect");
    selectButton.appendChild(selectList);
 
@@ -26,10 +26,8 @@ window.addEventListener("load", function() {
       selectList.appendChild(option);
    }
 
-   selector.addEventListener('click', function() {
-   });
-
-   missionData.innerHTML = `
+   selector.addEventListener('change', function() {
+      missionData.innerHTML = `
       <h2>Mission Destination</h2>
       <ol>
          <li>Name: ${planetData[0].name}</li>
@@ -40,6 +38,7 @@ window.addEventListener("load", function() {
       </ol>
       <img src="${planetData[0].image}">
       `;
+   });
 
    form.addEventListener("submit", function(event) {
       let pilotNameInput = document.querySelector("input[name=pilotName]");

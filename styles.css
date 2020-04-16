@@ -2,8 +2,16 @@ h1 {
     text-align: center;
 }
 
+p {
+    text-align: center;
+}
+
 div {
     text-align: left;
+}
+
+#selector {
+    text-align: center;
 }
 
 #faultyItems {
