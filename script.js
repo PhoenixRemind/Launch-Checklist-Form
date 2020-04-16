@@ -26,7 +26,7 @@ window.addEventListener("load", function() {
       selectList.appendChild(option);
    }
 
-   selector.addEventListener('change', function() {
+   selector.addEventListener('click', function() {
       missionData.innerHTML = `
       <h2>Mission Destination</h2>
       <ol>
