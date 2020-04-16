@@ -12,17 +12,34 @@ window.addEventListener("load", function() {
    let faultyItems = document.getElementById("faultyItems");
    const missionData = document.getElementById("missionTarget");
 
+   let dropdownValues = [planetData[0], planetData[1], planetData[2], planetData[3], planetData[4], planetData[5]];
+   let selectButton = document.getElementById("selector");
+
+   let selectList = document.createElement("select");
+   selectList.setAttribute("id", "mySelect");
+   selectButton.appendChild(selectList);
+
+   for (let i=0; i<dropdownValues.length; i++) {
+      let option = document.createElement("option");
+      option.setAttribute("value", dropdownValues[i]);
+      option.text = dropdownValues[i].name;
+      selectList.appendChild(option);
+   }
+
+   selector.addEventListener('click', function() {
+   });
+
    missionData.innerHTML = `
-   <h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${planetData[0].name}</li>
-   <li>Diameter: ${planetData[0].diameter}</li>
-   <li>Star: ${planetData[0].star}</li>
-   <li>Distance from Earth: ${planetData[0].distance}</li>
-   <li>Number of Moons: ${planetData[0].moons}</li>
-</ol>
-<img src="${planetData[0].image}">
-`;
+      <h2>Mission Destination</h2>
+      <ol>
+         <li>Name: ${planetData[0].name}</li>
+         <li>Diameter: ${planetData[0].diameter}</li>
+         <li>Star: ${planetData[0].star}</li>
+         <li>Distance from Earth: ${planetData[0].distance}</li>
+         <li>Number of Moons: ${planetData[0].moons}</li>
+      </ol>
+      <img src="${planetData[0].image}">
+      `;
 
    form.addEventListener("submit", function(event) {
       let pilotNameInput = document.querySelector("input[name=pilotName]");
