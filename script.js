@@ -26,17 +26,19 @@ window.addEventListener("load", function() {
       selectList.appendChild(option);
    }
 
+   let planetSelect = mySelect.selectedIndex;
+
    selector.addEventListener('change', function() {
       missionData.innerHTML = `
       <h2>Mission Destination</h2>
       <ol>
-         <li>Name: ${planetData[0].name}</li>
-         <li>Diameter: ${planetData[0].diameter}</li>
-         <li>Star: ${planetData[0].star}</li>
-         <li>Distance from Earth: ${planetData[0].distance}</li>
-         <li>Number of Moons: ${planetData[0].moons}</li>
+         <li>Name: ${planetData[mySelect.selectedIndex].name}</li>
+         <li>Diameter: ${planetData[mySelect.selectedIndex].diameter}</li>
+         <li>Star: ${planetData[mySelect.selectedIndex].star}</li>
+         <li>Distance from Earth: ${planetData[mySelect.selectedIndex].distance}</li>
+         <li>Number of Moons: ${planetData[mySelect.selectedIndex].moons}</li>
       </ol>
-      <img src="${planetData[0].image}">
+      <img src="${planetData[mySelect.selectedIndex].image}">
       `;
    });
 
@@ -48,35 +50,27 @@ window.addEventListener("load", function() {
       event.preventDefault();
       if (pilotNameInput.value === "" || copilotNameInput.value === "" || isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value) || fuelLevelInput.value === "" || cargoMassInput.value === "") {
          alert("Please enter text for Pilot/Copilot and numerical values for Fuel/Cargo.");
-      }
-
-      if(fuelLevelInput.value < 10000 && cargoMassInput.value <= 9999) {
-         faultyItems.style.visibility = "visible";
-         launchStatus.innerHTML = "<span style='color: red;'>Shuttle not ready for launch</span>";
-         pilotStatus.innerHTML = `Pilot ${pilotNameInput.value} is ready for launch`;
-         copilotStatus.innerHTML = `Co-pilot ${copilotNameInput.value} is ready for launch`;
-         fuelStatus.innerHTML = `Not enough fuel to complete journey`;
-         cargoStatus.innerHTML = `Cargo mass low enough for launch`;
-      }
-      else if(cargoMassInput.value > 10000 && fuelLevelInput.value >= 10000) {
-         faultyItems.style.visibility = "visible";
-         launchStatus.innerHTML = "<span style='color: red;'>Shuttle not ready for launch</span>";
-         pilotStatus.innerHTML = `Pilot ${pilotNameInput.value} is ready for launch`;
-         copilotStatus.innerHTML = `Co-pilot ${copilotNameInput.value} is ready for launch`;
-         fuelStatus.innerHTML = `Fuel level high enough for launch`;
-         cargoStatus.innerHTML = `There is too much mass for shuttle takeoff`;
-      }
-      else if(cargoMassInput.value > 10000 && fuelLevelInput.value < 10000) {
-         faultyItems.style.visibility = "visible";
-         launchStatus.innerHTML = "<span style='color: red;'>Shuttle not ready for launch</span>";
-         pilotStatus.innerHTML = `Pilot ${pilotNameInput.value} is ready for launch`;
-         copilotStatus.innerHTML = `Co-pilot ${copilotNameInput.value} is ready for launch`;
-         fuelStatus.innerHTML = `Not enough fuel to complete journey`;
-         cargoStatus.innerHTML = `There is too much mass for shuttle takeoff`;
       } else {
          faultyItems.style.visibility = "visible";
          pilotStatus.innerHTML = `Pilot ${pilotNameInput.value} is ready for launch`;
          copilotStatus.innerHTML = `Co-pilot ${copilotNameInput.value} is ready for launch`;
+      }
+
+      if(fuelLevelInput.value < 10000 && cargoMassInput.value <= 9999) {
+         launchStatus.innerHTML = "<span style='color: red;'>Shuttle not ready for launch</span>";
+         fuelStatus.innerHTML = `Not enough fuel to complete journey`;
+         cargoStatus.innerHTML = `Cargo mass low enough for launch`;
+      }
+      else if(cargoMassInput.value > 10000 && fuelLevelInput.value >= 10000) {
+         launchStatus.innerHTML = "<span style='color: red;'>Shuttle not ready for launch</span>";
+         fuelStatus.innerHTML = `Fuel level high enough for launch`;
+         cargoStatus.innerHTML = `There is too much mass for shuttle takeoff`;
+      }
+      else if(cargoMassInput.value > 10000 && fuelLevelInput.value < 10000) {
+         launchStatus.innerHTML = "<span style='color: red;'>Shuttle not ready for launch</span>";
+         fuelStatus.innerHTML = `Not enough fuel to complete journey`;
+         cargoStatus.innerHTML = `There is too much mass for shuttle takeoff`;
+      } else {
          launchStatus.innerHTML = "<span style='color: green;'>Shuttle is ready for launch!</span>";
          fuelStatus.innerHTML = `Fuel level high enough for launch`;
          cargoStatus.innerHTML = `Cargo mass low enough for launch`;
