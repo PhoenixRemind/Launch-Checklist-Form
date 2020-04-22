@@ -11,11 +11,10 @@ window.addEventListener("load", function() {
    let cargoStatus = document.getElementById("cargoStatus");
    let faultyItems = document.getElementById("faultyItems");
    const missionData = document.getElementById("missionTarget");
-
    let dropdownValues = [planetData[0], planetData[1], planetData[2], planetData[3], planetData[4], planetData[5]];
    let selectButton = document.getElementById("selector");
    let selectList = document.createElement("select");
-
+   let numberInput = /[0-9]/;
    selectList.setAttribute("id", "mySelect");
    selectButton.appendChild(selectList);
 
@@ -46,7 +45,7 @@ window.addEventListener("load", function() {
       let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
       let cargoMassInput = document.querySelector("input[name=cargoMass]");
       event.preventDefault();
-      if (pilotNameInput.value === "" || copilotNameInput.value === "" || isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value) || fuelLevelInput.value === "" || cargoMassInput.value === "") {
+      if (pilotNameInput.value.match(numberInput) || copilotNameInput.value.match(numberInput) || isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value) || fuelLevelInput.value === "" || cargoMassInput.value === "" || pilotNameInput.value === "" || copilotNameInput.value === "") {
          alert("Please enter text for Pilot/Copilot and numerical values for Fuel/Cargo.");
       } else {
          faultyItems.style.visibility = "visible";
